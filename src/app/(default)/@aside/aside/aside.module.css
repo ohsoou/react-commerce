@@ -1,0 +1,62 @@
+.hidden {
+    display: none;
+}
+.sideCon {
+    width: 100dvw;
+    height: 100dvh;
+    background: #FFFFFF;
+    position: absolute;
+    top: 70px;
+    color: #505050;
+    overflow-y: scroll;
+}
+
+.sideCon h2 {
+    font-size: 22px;
+    padding: 10px;
+    font-weight: bold;
+
+}
+
+.sideMenu ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sideMenu ul.sideTopMenu li {
+    position: relative;
+    float: left;
+    width: 100%;
+    list-style-type: none;
+    font-size: 18px;
+}
+
+.sideMenu ul.sideTopMenu li div {
+    line-height: 50px;
+    text-indent: 20px;
+    color: #000;
+    background-color: #fff;
+    text-decoration: none;
+}
+
+.sideMenu ul.sideTopMenu li .sideLeafMenu a {
+    display: block;
+    width: 100%;
+    background: #F7F7F7F7;
+}
+
+.sideMenu ul.sideTopMenu li .sub-1 li div {
+    text-indent: 30px;
+}
+.sideMenu ul.sideTopMenu li .sub-2 li div  {
+    text-indent: 60px;
+}
+.sideMenu ul.sideTopMenu li .sub-3 li div  {
+    text-indent: 90px;
+}
+
+.sideMenu li .arrow {
+    display: inline;
+    width: 12px;
+}
