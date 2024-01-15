@@ -9,9 +9,8 @@ type DisplayGoodsQueryProps = {
     queryFn?: (context?: QueryFunctionContext) => Promise<DisplayGoods[]>,
     query: {dispCtgNo: string}
 };
-//<DisplayGoods[], Object, InfiniteData<DisplayGoods[]>, [_1 :string, _2 :string], number>
 const useDisplayGoodsQuery = ({page, queryFn, query}: DisplayGoodsQueryProps) => {
-    console.log("useDisplayGoodsQuery")
+    // console.log("useDisplayGoodsQuery")
     const {
         data,
         isLoading,
@@ -23,7 +22,7 @@ const useDisplayGoodsQuery = ({page, queryFn, query}: DisplayGoodsQueryProps) =>
         isFetching, // 쿼리를 가져오고 있는지
     } = useInfiniteQuery({
         queryKey: ['display', 'goods'],
-        queryFn: ({ pageParam = 1 }) => getCategoryGoods({params: { dispCtgNo: query.dispCtgNo, page: pageParam }}),
+        queryFn: ({ pageParam}) => getCategoryGoods({params: { dispCtgNo: query.dispCtgNo, page: pageParam }}),
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => lastPage.length > 0 ? allPages.length + 1 : undefined,
         staleTime: 60 * 1000, // 캐시 유지 타임 / 기본값 0 이며 fresh -> stale / 60 * 1000 = 1분
@@ -34,13 +33,11 @@ const useDisplayGoodsQuery = ({page, queryFn, query}: DisplayGoodsQueryProps) =>
         // enabled: // 실행되는 조건
     })
 
-    console.log(data);
+    const goodsList:DisplayGoods[] = useMemo(() => {
+        return data?.pages[0].listData
+    }, [data]);
 
-    // const goods = useMemo(() => {
-    //     return data?.pages
-    // }, [data]);
-
-    return { data, isLoading, isError, fetchNextPage, isFetchingNextPage };
+    return { goodsList, isLoading, isError, fetchNextPage, isFetching, hasNextPage, isFetchingNextPage };
 }
 
 export default useDisplayGoodsQuery;

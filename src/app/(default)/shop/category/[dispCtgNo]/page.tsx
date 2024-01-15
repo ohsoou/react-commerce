@@ -9,7 +9,6 @@ export default async function Page({params, searchParams } : Props)  {
 
     return (
         <>
-            shop/category {params.dispCtgNo}
             <DefaultTemplate params={params}/>
         </>
     )
