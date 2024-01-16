@@ -6,25 +6,33 @@ import classNames from "classnames";
 import GoodsItem from "@/components/shop/GoodsItem";
 import {useInView} from "react-intersection-observer";
 import {useEffect} from "react";
+import {DisplayGoods} from "@/models/DisplayCategory";
+import getCategoryGoods from "@/apis/category/getCategoryGoods";
 
 type Props = {
     params: {
         dispCtgNo : string,
-        dispCtgNm? : string
     }
 }
 const cx = classNames.bind(styled);
+const ROWS_PER_PAGE = 10;
 
 export default function GoodsList({params} : Props) {
     const {ref, inView} = useInView();
 
-    const { goodsList, isLoading, isError, isFetching, hasNextPage, fetchNextPage, isFetchingNextPage } =  useDisplayGoodsQuery({
-        page: 1,
-        query: params,
+    const { data, isLoading, isError, isFetching, hasNextPage, fetchNextPage, isFetchingNextPage } =  useDisplayGoodsQuery({
+        page: ROWS_PER_PAGE,
+        query: {
+            ...params,
+            pageSize: ROWS_PER_PAGE,
+            pageNo: 1,
+        }
     });
 
     useEffect(() => {
-        if ( inView ) !isFetching && hasNextPage && fetchNextPage()
+        if ( inView ) {
+            !isFetching && hasNextPage && fetchNextPage()
+        }
     }, [ isFetching, hasNextPage, fetchNextPage, inView ])
 
     if (isLoading) {
@@ -38,15 +46,20 @@ export default function GoodsList({params} : Props) {
     if(isError) {
         return  (<></>);
     }
-
+    // console.log(JSON.stringify(data));
 
     return (
         <div className={styled.dpGoodsList}>
             <div className={styled.dpGoods__container}>
                 <div className={styled.dpGoods__wrapper}>
                     <div className={styled.dpGoods__items}>
+                        {/*{*/}
+                        {/*    data?.pages?.map((page) => {*/}
+                        {/*        return page?.map((goods:DisplayGoods, idx:number) => <GoodsItem key={idx} goods={goods}/>)*/}
+                        {/*    })*/}
+                        {/*}*/}
                         {
-                            goodsList.map((goods, idx) => <GoodsItem key={idx} goods={goods}/>)
+                            data?.map((page) => page.listData.map((goods:DisplayGoods, idx:number) => <GoodsItem goods={goods} key={idx}/>))
                         }
                     </div>
                     <div ref={ref}/>
