@@ -10,20 +10,17 @@ import {DisplayGoods} from "@/models/DisplayCategory";
 import getCategoryGoods from "@/apis/category/getCategoryGoods";
 
 type Props = {
-    params: {
-        dispCtgNo : string,
-    }
+    dispCtgNo : string,
 }
 const cx = classNames.bind(styled);
 const ROWS_PER_PAGE = 10;
 
-export default function GoodsList({params} : Props) {
+export default function GoodsList({dispCtgNo} : Props) {
     const {ref, inView} = useInView();
 
     const { data, isLoading, isError, isFetching, hasNextPage, fetchNextPage, isFetchingNextPage } =  useDisplayGoodsQuery({
-        page: ROWS_PER_PAGE,
         query: {
-            ...params,
+            dispCtgNo,
             pageSize: ROWS_PER_PAGE,
             pageNo: 1,
         }

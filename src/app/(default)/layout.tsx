@@ -17,7 +17,7 @@ export default async function layout({children, aside}: Props) {
     const dehydrateState = dehydrate(queryClient);
 
     return (
-        <main id="app-container">
+        <main id="app-container" className="container m-auto">
             <ErrorBoundary errorComponent={ErrorPage}>
                 <QueryProvider>
                     <HydrationBoundary state={dehydrateState}>

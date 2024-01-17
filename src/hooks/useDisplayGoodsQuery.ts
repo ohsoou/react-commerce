@@ -5,7 +5,6 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import getCategoryGoods from "@/apis/category/getCategoryGoods";
 
 type DisplayGoodsQueryProps = {
-    page?: number,
     queryFn?: (context?: QueryFunctionContext) => Promise<any>,
     query: {
         dispCtgNo: string,
@@ -13,7 +12,7 @@ type DisplayGoodsQueryProps = {
         pageSize: number,
     },
 };
-const useDisplayGoodsQuery = ({page, queryFn, query,}: DisplayGoodsQueryProps) => {
+const useDisplayGoodsQuery = ({queryFn, query,}: DisplayGoodsQueryProps) => {
     // console.log("useDisplayGoodsQuery")
     const {
         data,

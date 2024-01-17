@@ -1,16 +1,15 @@
 import GoodsList from "@/components/shop/GoodsList";
 
 type Props = {
-    params: {
-        dispCtgNo : string,
-    }
+    dispCtgNo : string,
+    siteNo?: string,
 }
-export default function DefaultTemplate({ params } : Props) {
+export default function DefaultTemplate({ dispCtgNo, siteNo } : Props) {
 
     return (
         <>
             <div>대충 메뉴</div>
-            <GoodsList params={params}/>
+            <GoodsList dispCtgNo={dispCtgNo}/>
         </>
     )
 }
