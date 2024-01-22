@@ -13,7 +13,7 @@ const Icon = ({ Icon, nameOfIcon, linkAddress, option }: Props) => {
     return (
         <Link
             href={linkAddress}
-            className="text-primary1 relative block text-center transition hover:text-hovercolor"
+            className="text-primary1 text-center transition hover:text-hovercolor"
             scroll={false}
         >
             <div className="px-3 text-2xl">

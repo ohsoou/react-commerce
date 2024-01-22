@@ -1,6 +1,6 @@
 "use client"
 
-import {DisplayCategory} from "@/models/DisplayCategory";
+import {DisplayCategory} from "@/types/DisplayCategory";
 import Link from "next/link";
 import styled from "@/app/(default)/@aside/aside/aside.module.css";
 import cx from "classnames";

@@ -8,6 +8,7 @@ import {usePathname, useRouter} from "next/navigation";
 import {IoEyeOutline} from "react-icons/io5";
 import {CiSearch} from "react-icons/ci";
 import {BsHouseDoor} from "react-icons/bs";
+import {DefaultMedia, Mobile} from "@/components/common/DeviceComponents";
 
 export default function GNB() {
     const router = useRouter();
@@ -48,35 +49,28 @@ export default function GNB() {
 
     return (
         <>
-            <nav className="m-auto hidden bg-transparent lg:block ">
-                <div className="container flex grow items-center justify-between w-1/2">
+            <DefaultMedia>
+                <nav className="m-auto bg-transparent px-7">
+                    <div className="container flex grow items-center justify-between w-1/2">
+                        <MenuButton/>
+                        <span><Link href="/">홈</Link></span>
+                        <span><Link href="/">브랜드</Link></span>
+                        <span><Link href="/">기획전</Link></span>
+                        <span><Link href="/">이벤트</Link></span>
+                        <span><Link href="/">랭킹존</Link></span>
+                    </div>
+                </nav>
+            </DefaultMedia>
+
+            <Mobile>
+                <div className="fixed bottom-0 left-0 z-30 flex w-full items-start justify-around border-t border-primary1 bg-white px-6 py-3 shadow-sm">
                     <MenuButton/>
-                    <span><Link href="/">홈</Link></span>
-                    <span><Link href="/">브랜드</Link></span>
-                    <span><Link href="/">기획전</Link></span>
-                    <span><Link href="/">이벤트</Link></span>
-                    <span><Link href="/">랭킹존</Link></span>
+                    <Icon Icon={CiSearch} linkAddress={'/'}/>
+                    <Icon Icon={BsHouseDoor} linkAddress={'/'}/>
+                    <Icon Icon={FiUser} linkAddress={'/'}/>
+                    <Icon Icon={IoEyeOutline} linkAddress="/"/>
                 </div>
-            </nav>
-            <div className="fixed bottom-0 left-0 z-30 flex w-full items-start justify-around border-t border-primary1 bg-white px-6 py-3 shadow-sm lg:hidden">
-                <MenuButton/>
-                <Icon
-                    Icon={CiSearch}
-                    linkAddress={'/'}
-                />
-                <Icon
-                    Icon={BsHouseDoor}
-                    linkAddress={'/'}
-                />
-                <Icon
-                    Icon={FiUser}
-                    linkAddress={'/'}
-                />
-                <Icon
-                    Icon={IoEyeOutline}
-                    linkAddress="/"
-                />
-            </div>
+            </Mobile>
         </>
     );
 }

@@ -9,6 +9,7 @@ import GNB from "@/components/header/GNB";
 import SearchBar from "@/components/header/SearchBar";
 import Icon from "@/components/common/Icon";
 import BackButton from "@/components/common/BackButton";
+import {DefaultMedia, Mobile} from "@/components/common/DeviceComponents";
 
 
 export default function CommonHeader() {
@@ -17,7 +18,7 @@ export default function CommonHeader() {
 
     return (
         <header>
-            <div className="bg-transparent h-16 flex p-7">
+            <div className="bg-transparent h-16 flex px-7">
                 <div className={cx([styled.nav, styled.left])}>
                     <div className={cx([styled.logoContainer, styled.hide])}>
                         <Link href="/">
@@ -36,14 +37,18 @@ export default function CommonHeader() {
                 </div>
 
                 <div className={cx([styled.nav, styled.right])}>
-                    <div className="hidden lg:flex justify-between items-center gap-3">
+                    <DefaultMedia>
+                        <div className="flex justify-between items-center gap-3">
                             <Icon Icon={BsPerson} nameOfIcon="마이페이지" linkAddress="/"/>
                             <Icon Icon={BsBasket} nameOfIcon="장바구니" linkAddress="/"/>
                             <Icon Icon={IoEyeOutline} nameOfIcon="최근본상품" linkAddress="/"/>
-                    </div>
-                    <div className="lg:hidden flex justify-between items-center gap-3">
+                        </div>
+                    </DefaultMedia>
+                    <Mobile>
+                        <div className="flex justify-between items-center gap-3">
                             <Icon Icon={BsBasket} linkAddress="/"/>
-                    </div>
+                        </div>
+                    </Mobile>
                 </div>
             </div>
 
