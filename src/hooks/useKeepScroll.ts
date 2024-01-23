@@ -1,20 +1,30 @@
 import {useEffect} from "react";
-import {usePathname, useSearchParams} from "next/navigation";
+import SessionStorage from "@/utils/SessionStorage";
+import {useRouteChangeEvents, useRouter} from "nextjs-router-events";
 
 function useKeepScroll({pageNo, sessionKey} :  {pageNo: number, sessionKey: string}) {
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
+    // useEffect(() => {
+    //     if (history.scrollRestoration) {
+    //         window.history.scrollRestoration = 'manual';
+    //     }
+    // }, []);
 
-    useEffect(() => {
-        sessionStorage.removeItem(sessionKey);
-    }, []);
 
-    useEffect(() => {
-        sessionStorage.setItem(sessionKey, JSON.stringify({
-            scrollAnchor: scrollY,
-            pageNo
-        }));
-    }, [pageNo, pathname, searchParams]);
+    function saveScrollAnchor() {
+        const scrollPos = { scrollAnchor: window.scrollY, pageNo };
+        SessionStorage.setItem(sessionKey, JSON.stringify(scrollPos));
+    }
+    function setScroll() {
+        const scrollPos = JSON.parse(SessionStorage.getItem(sessionKey) ?? '{}');
+        console.log(scrollPos)
+        if (scrollPos) {
+            window.scrollTo({left: 0, top: scrollPos.scrollAnchor})
+        }
+    }
+    useRouteChangeEvents({onRouteChangeStart : saveScrollAnchor});
+    useRouteChangeEvents({onRouteChangeComplete : setScroll});
+
 }
+
 
 export default useKeepScroll;

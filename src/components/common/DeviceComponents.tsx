@@ -1,6 +1,6 @@
 import {ReactNode} from "react";
 import {useMediaQuery} from "react-responsive";
-import {useIsClient} from "@/hooks/useMediaQuery";
+import {useIsClient} from "@/hooks/useIsClient";
 
 const Desktop = ({children}: {children: ReactNode}): ReactNode | null => {
     const isDesktop = useMediaQuery({ minWidth: 1024 });
